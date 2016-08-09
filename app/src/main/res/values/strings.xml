@@ -2,11 +2,27 @@
 
     <!--App strings-->
     <string name="app_name">Boot Receiver</string>
-    <string name="boot_complete_toast">Boot Complete. Toggles updated</string>
+    <string name="boot_complete_toast">Boot completed - Quickpanel toggles setted</string>
 
 
     <!--Keys and values - untranslatable-->
-    <string name="tiles_key" translatable="false">sysui_qs_tiles</string>
-    <string name="tiles_value" translatable="false">Wifi,MobileData,Flashlight,Location,SilentMode,RotationLock,Bluetooth,PowerSaving,AirplaneMode,DormantMode,UltraPowerSaving,WifiHotspot,PersonalMode,AllShareCast,Nfc,Sync,Aod,SFinder,</string>
-    <string name="active_tiles_number_key" translatable="false">sysui_qs_active_tiles</string>
+
+    <!--Key of the item in Settings DB that contains ACTUAL TOGGLES ORDER-->
+    <!--It will be resetted on reboot and you have to apply xda mod to solve-->
+    <string name="tiles_key" translatable="false">notification_panel_active_app_list</string>
+
+    <!--Key of the item in Settings DB that contains toggles order APPLIED WHEN YOU RESET TOGGLES order-->
+    <!--It will be resetted on reboot and you have to apply xda mod to solve-->
+    <string name="tiles_reset_key" translatable="false">notification_panel_active_app_list_for_reset</string>
+
+    <!--Key of the item in Settings DB that is never used by the system-->
+    <!--So we have previously edited this (with xda mod) and now it will contain the same value of notification_panel_active_app_list-->
+    <!--The advantage is that this will NEVER BE RESETTED on reboot and so (because this contains notification_panel_active_app_list BEFORE REBOOT)-->
+    <!--we will take the Settings DB value of this item and we will put it into notification_panel_active_app_list AFTER REBOOT-->
+    <string name="tiles_default_key" translatable="false">notification_panel_default_active_app_list</string>
+
+    <!--This contains the names of all toggles we want in Notification Panel -->
+    <!--This will be put into notification_panel_active_app_list_for_reset on every reboot -->
+    <!--On first rom boot it will be put also in notification_panel_active_app_list and notification_panel_default_active_app_list -->
+    <string name="tiles_reset_value" translatable="false">Wifi;MobileData;Location;TorchLight;SilentMode;AutoRotate;Bluetooth;WiFiHotspot;AirplaneMode;DormantMode;Nfc;SBeam;AllShareCast;CarMode;QuickConnect;Toolbox;MultiWindow;TouchSensitivity;PowerSaving;UltraPowerSaving;AirGesture;AirView;SmartStay;SmartPause;NetworkBooster;PersonalMode;SFinder;Sync;</string>
 </resources>
