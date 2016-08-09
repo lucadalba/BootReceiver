@@ -9,6 +9,10 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 /**
  * Created by Wuby and Dax on 15/09/2015.
  * Updated for MM support
@@ -20,34 +24,41 @@ public class BootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         ContentResolver cr = context.getContentResolver();
+
+        // *** READ STRINGS.XML FOR MORE EXPLINATIONS ***
+
+        //All this commands will be executed on boot
+
+        //This takes the Settings DB value of notification_panel_default_active_app_list
+        String toggles2 = Settings.System.getString(cr, context.getString(R.string.tiles_default_key));
+        final String toggles = String.valueOf(toggles2);
+        //And put it into notification_panel_active_app_list
+        Settings.System.putString(cr, context.getString(R.string.tiles_key), toggles);
+
+        //This takes the value of all toggles we want in notificaion panel
+        //And put it into notification_panel_active_app_list_for_reset
+        Settings.System.putString(cr, context.getString(R.string.tiles_reset_key), context.getString(R.string.tiles_reset_value));
+
+        //This verifies if the boot is the first rom boot
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor ed = sp.edit();
         boolean isFirstBoot = sp.getBoolean("isFirst", true);
         if (isFirstBoot) {
-            Settings.Secure.putString(cr, context.getString(R.string.tiles_key), context.getString(R.string.tiles_value));
-            Settings.Secure.putInt(cr, context.getString(R.string.active_tiles_number_key), context.getResources().getInteger(R.integer.active_tiles_number));
-            //Adopted for working on Settings.Secure
-            /*
-            You can use this method to make changes to the settings storage
-            upon first boot. This application will only run once. You can apply any changes you wish, like so:
+            //THIS HAPPENS AT FIRST ROM BOOT
 
-                        Settings.Secure.putInt(cr, "rom_test_bootreceiver", 1);
+            //This takes the value of all toggles we want in notificaion panel
+            //And put it into notification_panel_active_app_list ONLY AT FIRST ROM BOOT
+            Settings.System.putString(cr, context.getString(R.string.tiles_key), context.getString(R.string.tiles_reset_value));
 
-                        or
+            //This takes the value of all toggles we want in notificaion panel
+            //And put it into notification_panel_active_app_list ONLY AT FIRST ROM BOOT
+            Settings.System.putString(cr, context.getString(R.string.tiles_default_key), context.getString(R.string.tiles_reset_value));
 
-                        Settings.Secure.putString(cr, "your_key_name", "some string");
-
-                        or
-
-                        Settings.Secure.putFloat(cr, "your_key_name", 1.0F);
-
-              Those are just small examples. You can perform various functions at the first boot of your rom.
-              This is just a tool to get you started on catching that boot complete action
-
-             */
-            Toast.makeText(context, R.string.boot_complete_toast, Toast.LENGTH_SHORT).show();
+            //Do NOT change this:
             ed.putBoolean("isFirst", false).apply();
         }
 
+        //This shows a toast that tells the boot is completed and the toggles are set
+        Toast.makeText(context, R.string.boot_complete_toast, Toast.LENGTH_SHORT).show();
     }
 }
