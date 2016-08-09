@@ -1,0 +1,5 @@
+<resources>
+
+    <string name="boot_complete_toast">Avvio completato - Toggles pannello notifiche impostati</string>
+
+</resources>
