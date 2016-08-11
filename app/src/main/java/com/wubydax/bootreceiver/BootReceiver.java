@@ -25,7 +25,7 @@ public class BootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         ContentResolver cr = context.getContentResolver();
 
-        // *** READ STRINGS.XML FOR MORE EXPLINATIONS ***
+        // *** READ STRINGS.XML FOR MORE EXPLAINATIONS ***
 
         //All this commands will be executed on boot
 
@@ -35,7 +35,7 @@ public class BootReceiver extends BroadcastReceiver {
         //And put it into notification_panel_active_app_list
         Settings.System.putString(cr, context.getString(R.string.tiles_key), toggles);
 
-        //This takes the value of all toggles we want in notificaion panel
+        //This takes the value of all toggles we want in notification panel
         //And put it into notification_panel_active_app_list_for_reset
         Settings.System.putString(cr, context.getString(R.string.tiles_reset_key), context.getString(R.string.tiles_reset_value));
 
@@ -46,12 +46,12 @@ public class BootReceiver extends BroadcastReceiver {
         if (isFirstBoot) {
             //THIS HAPPENS AT FIRST ROM BOOT
 
-            //This takes the value of all toggles we want in notificaion panel
+            //This takes the value of all toggles we want in notification panel
             //And put it into notification_panel_active_app_list ONLY AT FIRST ROM BOOT
             Settings.System.putString(cr, context.getString(R.string.tiles_key), context.getString(R.string.tiles_reset_value));
 
-            //This takes the value of all toggles we want in notificaion panel
-            //And put it into notification_panel_active_app_list ONLY AT FIRST ROM BOOT
+            //This takes the value of all toggles we want in notification panel
+            //And put it into notification_panel_default_active_app_list ONLY AT FIRST ROM BOOT
             Settings.System.putString(cr, context.getString(R.string.tiles_default_key), context.getString(R.string.tiles_reset_value));
 
             //Do NOT change this:

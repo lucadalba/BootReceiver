@@ -2,7 +2,7 @@
 
     <!--App strings-->
     <string name="app_name">Boot Receiver</string>
-    <string name="boot_complete_toast">Boot completed - Quickpanel toggles setted</string>
+    <string name="boot_complete_toast">Boot completed - Quickpanel toggles set</string>
 
 
     <!--Keys and values - untranslatable-->
@@ -21,8 +21,11 @@
     <!--we will take the Settings DB value of this item and we will put it into notification_panel_active_app_list AFTER REBOOT-->
     <string name="tiles_default_key" translatable="false">notification_panel_default_active_app_list</string>
 
+
+
     <!--This contains the names of all toggles we want in Notification Panel -->
     <!--This will be put into notification_panel_active_app_list_for_reset on every reboot -->
     <!--On first rom boot it will be put also in notification_panel_active_app_list and notification_panel_default_active_app_list -->
     <string name="tiles_reset_value" translatable="false">Wifi;MobileData;Location;TorchLight;SilentMode;AutoRotate;Bluetooth;WiFiHotspot;AirplaneMode;DormantMode;Nfc;SBeam;AllShareCast;CarMode;QuickConnect;Toolbox;MultiWindow;TouchSensitivity;PowerSaving;UltraPowerSaving;AirGesture;AirView;SmartStay;SmartPause;NetworkBooster;PersonalMode;SFinder;Sync;</string>
+
 </resources>
